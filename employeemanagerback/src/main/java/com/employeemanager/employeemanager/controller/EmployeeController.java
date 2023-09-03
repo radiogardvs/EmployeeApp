@@ -11,14 +11,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-
     private final EmployeeService employeeService;
-
-
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
     @GetMapping("/all")
     public ResponseEntity<List<Employee>> getAllEmployees(){
         List<Employee> employees= employeeService.findAllEmployees();

@@ -1,12 +1,10 @@
 package com.employeemanager.employeemanager.service;
 
-import com.employeemanager.employeemanager.exception.UserNotFoundException;
+import com.employeemanager.employeemanager.exception.EmployeeNotFoundException;
 import com.employeemanager.employeemanager.model.Employee;
 import com.employeemanager.employeemanager.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,7 +31,7 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeById(Long id){
-        return employeeRepository.findEmployeeById(id).orElseThrow(()-> new UserNotFoundException("user with id"+id+"was not found"));
+        return employeeRepository.findEmployeeById(id).orElseThrow(()-> new EmployeeNotFoundException("Employee with id"+id+"was not found"));
     }
     public void deleteEmployee(Long id){
         employeeRepository.deleteById(id);
