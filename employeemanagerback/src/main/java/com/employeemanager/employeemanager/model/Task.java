@@ -13,8 +13,8 @@ public class Task implements Serializable {
     private Long id;
     private String title;
     private String description;
-    private Time estimatedTime;
-    private Time effectiveTime;
+    private Integer estimatedTime;
+    private Integer effectiveTime;
     public void setId(Long id) {
         this.id = id;
     }
@@ -39,19 +39,19 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public Time getEstimatedTime() {
+    public Integer getEstimatedTime() {
         return estimatedTime;
     }
 
-    public void setEstimatedTime(Time estimatedTime) {
+    public void setEstimatedTime(Integer estimatedTime) {
         this.estimatedTime = estimatedTime;
     }
 
-    public Time getEffectiveTime() {
+    public Integer getEffectiveTime() {
         return effectiveTime;
     }
 
-    public void setEffectiveTime(Time effectiveTime) {
+    public void setEffectiveTime(Integer effectiveTime) {
         this.effectiveTime = effectiveTime;
     }
 }
