@@ -12,9 +12,6 @@ public class Room implements Serializable {
     @Column(nullable = false, updatable = false)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private List<EventRoom> eventRoomList;
-
     public Room() {
 
     }
@@ -39,20 +36,11 @@ public class Room implements Serializable {
         this.name = name;
     }
 
-    public List<EventRoom> getEventRoomList() {
-        return eventRoomList;
-    }
-
-    public void setEventRoomList(List<EventRoom> eventRoomList) {
-        this.eventRoomList = eventRoomList;
-    }
-
     @Override
     public String toString() {
         return "Room{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", eventRoomList=" + eventRoomList +
                 '}';
     }
 }

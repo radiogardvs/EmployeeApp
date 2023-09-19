@@ -14,10 +14,6 @@ public class Task implements Serializable {
     private String title;
     private Integer estimatedTime;
     private Integer effectiveTime;
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    private List<EmployeeTask> employeeTaskList;
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    private List<TaskNote> taskNoteList;
     public Task(){
     }
     public Task(String title, Integer estimatedTime, Integer effectiveTime){
@@ -55,26 +51,6 @@ public class Task implements Serializable {
         return estimatedTime;
     }
 
-    public void setEstimatedTime(Integer estimatedTime) {
-        this.estimatedTime = estimatedTime;
-    }
-
-    public List<EmployeeTask> getEmployeeTaskList() {
-        return employeeTaskList;
-    }
-
-    public void setEmployeeTaskList(List<EmployeeTask> employeeTaskList) {
-        this.employeeTaskList = employeeTaskList;
-    }
-
-    public List<TaskNote> getTaskNoteList() {
-        return taskNoteList;
-    }
-
-    public void setTaskNoteList(List<TaskNote> taskNoteList) {
-        this.taskNoteList = taskNoteList;
-    }
-
     @Override
     public String toString() {
         return "Task{" +
@@ -82,8 +58,6 @@ public class Task implements Serializable {
                 ", title='" + title + '\'' +
                 ", estimatedTime=" + estimatedTime +
                 ", effectiveTime=" + effectiveTime +
-                ", employeeTaskList=" + employeeTaskList +
-                ", taskNoteList=" + taskNoteList +
                 '}';
     }
 }

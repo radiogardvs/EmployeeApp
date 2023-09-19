@@ -18,10 +18,6 @@ public class Employee implements Serializable {
     private String imageUrl;
     @Column(nullable = false, updatable = false)
     private String employeeCode;
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<EmployeeTask> employeeTaskList;
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    private List<EmployeeEvent> employeeEventList;
 
     public Employee() {
     }
@@ -91,21 +87,6 @@ public class Employee implements Serializable {
         this.employeeCode = employeeCode;
     }
 
-    public List<EmployeeTask> getEmployeeTaskList() {
-        return employeeTaskList;
-    }
-
-    public void setEmployeeTaskList(List<EmployeeTask> employeeTaskList) {
-        this.employeeTaskList = employeeTaskList;
-    }
-
-    public List<EmployeeEvent> getEmployeeEventList() {
-        return employeeEventList;
-    }
-
-    public void setEmployeeEventList(List<EmployeeEvent> employeeEventList) {
-        this.employeeEventList = employeeEventList;
-    }
 
     @Override
     public String toString() {

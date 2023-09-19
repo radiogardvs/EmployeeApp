@@ -2,11 +2,7 @@ package com.employeemanager.employeemanager.service;
 
 import com.employeemanager.employeemanager.exception.EmployeeNotFoundException;
 import com.employeemanager.employeemanager.model.Employee;
-import com.employeemanager.employeemanager.model.EmployeeEvent;
-import com.employeemanager.employeemanager.model.EmployeeTask;
-import com.employeemanager.employeemanager.model.Task;
 import com.employeemanager.employeemanager.repository.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +12,10 @@ import java.util.UUID;
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
-    private final TaskRepository taskRepository;
-    private final EventRepository eventRepository;
-    private final EmployeeEventRepository employeeEventRepository;
-    private final EmployeeTaskRepository employeeTaskRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, EmployeeEventRepository employeeEventRepository, EmployeeTaskRepository employeeTaskRepository,
-                           TaskRepository taskRepository, EventRepository eventRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
-        this.employeeEventRepository = employeeEventRepository;
-        this.employeeTaskRepository = employeeTaskRepository;
-        this.taskRepository = taskRepository;
-        this.eventRepository = eventRepository;
     }
 
     public Employee addEmployee(Employee employee) {
@@ -52,16 +39,4 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public EmployeeTask assignTaskToEmployee(Long employeeId, Long taskId) {
-        EmployeeTask employeeTask=new EmployeeTask();
-        employeeTask.setEmployee(employeeRepository.findEmployeeById(employeeId).orElseThrow());//todo exception
-        employeeTask.setTask(taskRepository.findTaskById(taskId).orElseThrow());
-        return employeeTaskRepository.save(employeeTask);
-    }
-    public EmployeeEvent assignEventToEmployee(Long employeeId, Long eventId) {
-        EmployeeEvent employeeEvent=new EmployeeEvent();
-        employeeEvent.setEmployee(employeeRepository.findEmployeeById(employeeId).orElseThrow());//todo exception
-        employeeEvent.setEvent(eventRepository.findEventById(eventId).orElseThrow());
-        return employeeEventRepository.save(employeeEvent);
-    }
 }

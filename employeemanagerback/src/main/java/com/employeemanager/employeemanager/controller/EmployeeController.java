@@ -43,14 +43,4 @@ public class EmployeeController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PostMapping("/add/employee/{employee_id}/task/{task_id}")
-    public ResponseEntity<EmployeeTask> assignTaskToEmployee(@PathVariable("employee_id") Long employeeId, @PathVariable("task_id") Long taskId){
-        EmployeeTask newEmployeeTask=employeeService.assignTaskToEmployee(employeeId, taskId);
-        return new ResponseEntity<>(newEmployeeTask, HttpStatus.CREATED);
-    }
-    @PostMapping("/add/employee/{employee_id}/event/{event_id}")
-    public ResponseEntity<EmployeeEvent> assignEventToEmployee(@PathVariable("employee_id") Long employeeId, @PathVariable("event_id") Long eventId){
-        EmployeeEvent newEmployeeEvent=employeeService.assignEventToEmployee(employeeId, eventId);
-        return new ResponseEntity<>(newEmployeeEvent, HttpStatus.CREATED);
-    }
 }
