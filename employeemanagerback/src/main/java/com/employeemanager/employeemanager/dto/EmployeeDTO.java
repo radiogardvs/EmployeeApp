@@ -1,24 +1,37 @@
 package com.employeemanager.employeemanager.dto;
 
 public class EmployeeDTO {
+    private Long id;
     private String name;
     private String email;
     private String jobTitle;
     private String phone;
     private String imageUrl;
     private String employeeCode;
-    public EmployeeDTO(){
+
+    public EmployeeDTO() {
 
     }
-    public EmployeeDTO(String name, String email, String jobTitle, String phone, String imageUrl, String employeeCode){
-        this.name=name;
-        this.email=email;
-        this.jobTitle=jobTitle;
-        this.phone=phone;
-        this.imageUrl=imageUrl;
-        this.employeeCode=employeeCode;
+
+    public EmployeeDTO(Long id,String name, String email, String jobTitle, String phone, String imageUrl, String employeeCode) {
+        this.id=id;
+        this.name = name;
+        this.email = email;
+        this.jobTitle = jobTitle;
+        this.phone = phone;
+        this.imageUrl = imageUrl;
+        this.employeeCode = employeeCode;
 
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
