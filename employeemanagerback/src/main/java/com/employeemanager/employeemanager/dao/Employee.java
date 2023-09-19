@@ -1,9 +1,8 @@
-package com.employeemanager.employeemanager.model;
+package com.employeemanager.employeemanager.dao;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Employee implements Serializable {
