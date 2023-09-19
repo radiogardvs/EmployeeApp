@@ -1,15 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Employee } from './model/employee';
-import { EmployeeService } from './service/employee/employee.service';
+import { EmployeeService } from 'src/app/service/employee/employee.service';
+import { Employee } from '../../model/employee';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+  styleUrls: ['./employee.component.css']
 })
-export class AppComponent implements OnInit {
+export class EmployeeComponent implements OnInit{
+  
   public employees: Employee[]=[];
   public newEmployee: any;
   public editEmployee: any;
@@ -109,7 +110,6 @@ export class AppComponent implements OnInit {
     container?.appendChild(button);
     button.click();
   }
-
 
 
 }

@@ -3,24 +3,36 @@ package com.employeemanager.employeemanager.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.util.List;
 
 @Entity
 public class Task implements Serializable {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(nullable=false, updatable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false, updatable = false)
     private Long id;
     private String title;
-    private String description;
     private Integer estimatedTime;
     private Integer effectiveTime;
-    public void setId(Long id) {
-        this.id = id;
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<EmployeeTask> employeeTaskList;
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<TaskNote> taskNoteList;
+    public Task(){
+    }
+    public Task(String title, Integer estimatedTime, Integer effectiveTime){
+        this.title=title;
+        this.estimatedTime=estimatedTime;
+        this.effectiveTime=effectiveTime;
+
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -31,12 +43,12 @@ public class Task implements Serializable {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getEffectiveTime() {
+        return effectiveTime;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEffectiveTime(Integer effectiveTime) {
+        this.effectiveTime = effectiveTime;
     }
 
     public Integer getEstimatedTime() {
@@ -47,11 +59,31 @@ public class Task implements Serializable {
         this.estimatedTime = estimatedTime;
     }
 
-    public Integer getEffectiveTime() {
-        return effectiveTime;
+    public List<EmployeeTask> getEmployeeTaskList() {
+        return employeeTaskList;
     }
 
-    public void setEffectiveTime(Integer effectiveTime) {
-        this.effectiveTime = effectiveTime;
+    public void setEmployeeTaskList(List<EmployeeTask> employeeTaskList) {
+        this.employeeTaskList = employeeTaskList;
+    }
+
+    public List<TaskNote> getTaskNoteList() {
+        return taskNoteList;
+    }
+
+    public void setTaskNoteList(List<TaskNote> taskNoteList) {
+        this.taskNoteList = taskNoteList;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", estimatedTime=" + estimatedTime +
+                ", effectiveTime=" + effectiveTime +
+                ", employeeTaskList=" + employeeTaskList +
+                ", taskNoteList=" + taskNoteList +
+                '}';
     }
 }
