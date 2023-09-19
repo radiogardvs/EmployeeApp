@@ -1,6 +1,6 @@
 package com.employeemanager.employeemanager.controller;
 
-import com.employeemanager.employeemanager.model.Employee;
+import com.employeemanager.employeemanager.model.*;
 import com.employeemanager.employeemanager.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,10 +36,21 @@ public class EmployeeController {
         Employee updateEmployee= employeeService.updateEmployee(employee);
         return new ResponseEntity<>(updateEmployee, HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id){
         employeeService.deleteEmployee(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/add/employee/{employee_id}/task/{task_id}")
+    public ResponseEntity<EmployeeTask> assignTaskToEmployee(@PathVariable("employee_id") Long employeeId, @PathVariable("task_id") Long taskId){
+        EmployeeTask newEmployeeTask=employeeService.assignTaskToEmployee(employeeId, taskId);
+        return new ResponseEntity<>(newEmployeeTask, HttpStatus.CREATED);
+    }
+    @PostMapping("/add/employee/{employee_id}/event/{event_id}")
+    public ResponseEntity<EmployeeEvent> assignEventToEmployee(@PathVariable("employee_id") Long employeeId, @PathVariable("event_id") Long eventId){
+        EmployeeEvent newEmployeeEvent=employeeService.assignEventToEmployee(employeeId, eventId);
+        return new ResponseEntity<>(newEmployeeEvent, HttpStatus.CREATED);
     }
 }
