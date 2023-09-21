@@ -21,30 +21,22 @@ public class TaskController {
 
     @GetMapping("/all")
     public ResponseEntity<List<TaskDTO>> getAllTasks() {
-        List<TaskDTO> taskDTOs = taskService.findAllTasks();
-        return new ResponseEntity<>(taskDTOs, HttpStatus.OK);
+        return new ResponseEntity<>(taskService.findAllTasks(), HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<TaskDTO> getTaskById(@PathVariable("id") Long id) {
-        TaskDTO taskDTO = taskService.findTaskById(id);
-        if (taskDTO != null) {
-            return new ResponseEntity<>(taskDTO, HttpStatus.OK);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return new ResponseEntity<>(taskService.findTaskById(id), HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<TaskDTO> addTask(@RequestBody TaskDTO taskDTO) {
-        TaskDTO newTaskDTO = taskService.addTask(taskDTO);
-        return new ResponseEntity<>(newTaskDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>( taskService.addTask(taskDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/update")
     public ResponseEntity<TaskDTO> updateTask(@RequestBody TaskDTO taskDTO) {
-        TaskDTO updatedTaskDTO = taskService.updateTask(taskDTO);
-        return new ResponseEntity<>(updatedTaskDTO, HttpStatus.OK);
+        return new ResponseEntity<>(taskService.updateTask(taskDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

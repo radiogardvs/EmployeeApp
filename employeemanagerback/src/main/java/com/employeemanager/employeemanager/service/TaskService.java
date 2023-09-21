@@ -13,33 +13,28 @@ import java.util.stream.Collectors;
 @Service
 public class TaskService {
     private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
+        this.taskMapper = taskMapper;
     }
 
     public TaskDTO addTask(TaskDTO taskDTO) {
-        Task task = TaskMapper.toEntity(taskDTO);
-        return TaskMapper.toDTO(taskRepository.save(task));
+        return taskMapper.toDTO(taskRepository.save(taskMapper.toEntity(taskDTO)));
     }
 
     public List<TaskDTO> findAllTasks() {
-        List<Task> tasks = taskRepository.findAll();
-        return tasks.stream()
-                .map(TaskMapper::toDTO)
-                .collect(Collectors.toList());
+        return taskRepository.findAll().stream().map(taskMapper::toDTO).collect(Collectors.toList());
     }
 
     public TaskDTO updateTask(TaskDTO taskDTO) {
-        Task task = TaskMapper.toEntity(taskDTO);
-        return TaskMapper.toDTO(taskRepository.save(task));
+        return taskMapper.toDTO(taskRepository.save(taskMapper.updateEntity(taskDTO)));
     }
 
     public TaskDTO findTaskById(Long id) {
-        Task task = taskRepository.findById(id)
-                .orElseThrow();
-        return TaskMapper.toDTO(task);
+        return taskMapper.toDTO(taskRepository.findById(id).orElseThrow());
     }
 
     public void deleteTask(Long id) {

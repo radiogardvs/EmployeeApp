@@ -3,24 +3,31 @@ package com.employeemanager.employeemanager.dao;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "task")
 public class Task implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false, updatable = false)
     private Long id;
     private String title;
     private String description;
     private Integer estimatedTime;
     private Integer effectiveTime;
-    public Task(){
+    @OneToMany(mappedBy = "task")
+    private Set<EmployeeTaskAssignment> employeeTaskAssignments = new HashSet<>();
+
+    public Task() {
     }
-    public Task(String title, String description, Integer estimatedTime, Integer effectiveTime){
-        this.title=title;
-        this.description=description;
-        this.estimatedTime=estimatedTime;
-        this.effectiveTime=effectiveTime;
+
+    public Task(String title, String description, Integer estimatedTime, Integer effectiveTime) {
+        this.title = title;
+        this.description = description;
+        this.estimatedTime = estimatedTime;
+        this.effectiveTime = effectiveTime;
     }
 
     public Long getId() {
@@ -63,6 +70,14 @@ public class Task implements Serializable {
         this.effectiveTime = effectiveTime;
     }
 
+    public Set<EmployeeTaskAssignment> getEmployeeTaskAssignments() {
+        return employeeTaskAssignments;
+    }
+
+    public void setEmployeeTaskAssignments(Set<EmployeeTaskAssignment> employeeTaskAssignments) {
+        this.employeeTaskAssignments = employeeTaskAssignments;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
@@ -71,6 +86,7 @@ public class Task implements Serializable {
                 ", description='" + description + '\'' +
                 ", estimatedTime=" + estimatedTime +
                 ", effectiveTime=" + effectiveTime +
+                ", employeeTaskAssignments=" + employeeTaskAssignments.toString() +
                 '}';
     }
 }

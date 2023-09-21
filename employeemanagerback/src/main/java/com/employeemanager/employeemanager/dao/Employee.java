@@ -3,8 +3,11 @@ package com.employeemanager.employeemanager.dao;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name="employee")
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,8 +18,11 @@ public class Employee implements Serializable {
     private String jobTitle;
     private String phone;
     private String imageUrl;
-    @Column(nullable = false, updatable = false)
     private String employeeCode;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<EmployeeTaskAssignment> employeeTaskAssignments = new HashSet<>();
+
 
     public Employee() {
     }
@@ -86,6 +92,13 @@ public class Employee implements Serializable {
         this.employeeCode = employeeCode;
     }
 
+    public Set<EmployeeTaskAssignment> getEmployeeTaskAssignments() {
+        return employeeTaskAssignments;
+    }
+
+    public void setEmployeeTaskAssignments(Set<EmployeeTaskAssignment> employeeTaskAssignments) {
+        this.employeeTaskAssignments = employeeTaskAssignments;
+    }
 
     @Override
     public String toString() {
@@ -96,6 +109,8 @@ public class Employee implements Serializable {
                 ", jobTitle='" + jobTitle + '\'' +
                 ", phone='" + phone + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", employeeCode='" + employeeCode + '\'' +
+                ", employeeTaskAssignments=" + employeeTaskAssignments.toString() +
                 '}';
     }
 }
