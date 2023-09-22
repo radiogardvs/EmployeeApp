@@ -23,6 +23,8 @@ public class Employee implements Serializable {
     @OneToMany(mappedBy = "employee")
     private Set<EmployeeTaskAssignment> employeeTaskAssignments = new HashSet<>();
 
+    @OneToMany(mappedBy = "employee")
+    private Set<EmployeeEventAssignment> employeeEventAssignments= new HashSet<>();
 
     public Employee() {
     }
@@ -100,6 +102,14 @@ public class Employee implements Serializable {
         this.employeeTaskAssignments = employeeTaskAssignments;
     }
 
+    public Set<EmployeeEventAssignment> getEmployeeEventAssignments() {
+        return employeeEventAssignments;
+    }
+
+    public void setEmployeeEventAssignments(Set<EmployeeEventAssignment> employeeEventAssignments) {
+        this.employeeEventAssignments = employeeEventAssignments;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -110,7 +120,8 @@ public class Employee implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", employeeCode='" + employeeCode + '\'' +
-                ", employeeTaskAssignments=" + employeeTaskAssignments.toString() +
+                ", employeeTaskAssignments=" + employeeTaskAssignments +
+                ", employeeEventAssignments=" + employeeEventAssignments +
                 '}';
     }
 }

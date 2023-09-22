@@ -12,16 +12,11 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
-    private final EmployeeTaskAssignmentMapper employeeTaskAssignmentMapper;
-    private final EmployeeTaskAssignmentRepository employeeTaskAssignmentRepository;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper, EmployeeTaskAssignmentMapper employeeTaskAssignmentMapper,
-                           EmployeeTaskAssignmentRepository employeeTaskAssignmentRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
         this.employeeMapper = employeeMapper;
-        this.employeeTaskAssignmentMapper = employeeTaskAssignmentMapper;
-        this.employeeTaskAssignmentRepository=employeeTaskAssignmentRepository;
     }
 
     public EmployeeDTO addEmployee(EmployeeDTO employeeDTO) {
@@ -44,8 +39,6 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public EmployeeTaskAssignmentDTO assignTask(EmployeeTaskAssignmentDTO employeeTaskAssignmentDTO){
-        return employeeTaskAssignmentMapper.toDTO(employeeTaskAssignmentRepository.save(employeeTaskAssignmentMapper.toEntity(employeeTaskAssignmentDTO)));
-    }
+
 
 }
