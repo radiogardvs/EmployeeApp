@@ -2,6 +2,9 @@ package com.employeemanager.employeemanager.dao;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "note")
 public class Note {
@@ -9,11 +12,17 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    public Note(){
+    @OneToMany(mappedBy = "note")
+    private Set<TaskNote> taskNotes = new HashSet<>();
+    @OneToMany(mappedBy = "note")
+    private Set<EventNote> eventNotes = new HashSet<>();
+
+    public Note() {
 
     }
-    public Note(String name){
-        this.name=name;
+
+    public Note(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -30,6 +39,22 @@ public class Note {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<TaskNote> getTaskNotes() {
+        return taskNotes;
+    }
+
+    public void setTaskNotes(Set<TaskNote> taskNotes) {
+        this.taskNotes = taskNotes;
+    }
+
+    public Set<EventNote> getEventNotes() {
+        return eventNotes;
+    }
+
+    public void setEventNotes(Set<EventNote> eventNotes) {
+        this.eventNotes = eventNotes;
     }
 
     @Override

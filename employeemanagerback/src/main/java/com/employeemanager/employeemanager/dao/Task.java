@@ -18,7 +18,9 @@ public class Task implements Serializable {
     private Integer estimatedTime;
     private Integer effectiveTime;
     @OneToMany(mappedBy = "task")
-    private Set<EmployeeTaskAssignment> employeeTaskAssignments = new HashSet<>();
+    private Set<EmployeeTaskAssignment> employeeTaskAssignments=new HashSet<>();
+    @OneToMany(mappedBy = "task")
+    private  Set<TaskNote> taskNotes=new HashSet<>();
 
     public Task() {
     }
@@ -76,6 +78,14 @@ public class Task implements Serializable {
 
     public void setEmployeeTaskAssignments(Set<EmployeeTaskAssignment> employeeTaskAssignments) {
         this.employeeTaskAssignments = employeeTaskAssignments;
+    }
+
+    public Set<TaskNote> getTaskNotes() {
+        return taskNotes;
+    }
+
+    public void setTaskNotes(Set<TaskNote> taskNotes) {
+        this.taskNotes = taskNotes;
     }
 
     @Override

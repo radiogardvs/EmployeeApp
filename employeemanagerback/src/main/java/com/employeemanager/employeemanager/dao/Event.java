@@ -1,5 +1,7 @@
 package com.employeemanager.employeemanager.dao;
+
 import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +15,8 @@ public class Event {
     private String eventType;
     @OneToMany(mappedBy = "event")
     private Set<EmployeeEventAssignment> employeeEventAssignmentSet = new HashSet<>();
+    @OneToMany(mappedBy = "event")
+    private Set<EventNote> eventNotes = new HashSet<>();
 
     public Event() {
 
