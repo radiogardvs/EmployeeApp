@@ -35,8 +35,8 @@ public class EmployeeEventAssignmentMapper {
     }
     public EmployeeEventAssignment toEntity(EmployeeEventAssignmentDTO employeeEventAssignmentDTO){
         EmployeeEventAssignment employeeEventAssignment=new EmployeeEventAssignment();
-        employeeEventAssignment.setEmployee(employeeRepository.findById(employeeEventAssignmentDTO.getId()).orElseThrow());
-        employeeEventAssignment.setEvent(eventRepository.findById(employeeEventAssignmentDTO.getId()).orElseThrow());
+        employeeEventAssignment.setEmployee(employeeRepository.findById(employeeEventAssignmentDTO.getEmployeeId()).orElseThrow());
+        employeeEventAssignment.setEvent(eventRepository.findById(employeeEventAssignmentDTO.getEventId()).orElseThrow());
         return employeeEventAssignment;
     }
     public EmployeeEventAssignment updateEntity(EmployeeEventAssignmentDTO employeeEventAssignmentDTO){
