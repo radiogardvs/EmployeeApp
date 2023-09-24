@@ -2,6 +2,7 @@ package com.employeemanager.employeemanager.service;
 
 import com.employeemanager.employeemanager.dto.EventNoteDTO;
 import com.employeemanager.employeemanager.dto.TaskNoteDTO;
+import com.employeemanager.employeemanager.exception.EventNoteNotFoundException;
 import com.employeemanager.employeemanager.mapper.EventNoteMapper;
 import com.employeemanager.employeemanager.repository.EventNoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class EventNoteService {
     }
 
     public EventNoteDTO findEventNoteById(Long id) {
-        return eventNoteMapper.toDTO(eventNoteRepository.findById(id).orElseThrow());//todo exception
+        return eventNoteMapper.toDTO(eventNoteRepository.findById(id).orElseThrow(() -> new EventNoteNotFoundException(id, 0L, 0L)));
     }
 
     public void deleteEventNote(Long id) {

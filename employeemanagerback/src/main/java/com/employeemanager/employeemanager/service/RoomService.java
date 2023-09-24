@@ -2,6 +2,7 @@ package com.employeemanager.employeemanager.service;
 
 import com.employeemanager.employeemanager.dto.NoteDTO;
 import com.employeemanager.employeemanager.dto.RoomDTO;
+import com.employeemanager.employeemanager.exception.RoomNotFoundException;
 import com.employeemanager.employeemanager.mapper.RoomMapper;
 import com.employeemanager.employeemanager.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class RoomService {
     }
 
     public RoomDTO findRoomById(Long id) {
-        return roomMapper.toDTO(roomRepository.findById(id).orElseThrow());
+        return roomMapper.toDTO(roomRepository.findById(id).orElseThrow(()-> new RoomNotFoundException(id)));
     }
 
     public void deleteRoom(Long id) {

@@ -1,6 +1,7 @@
 package com.employeemanager.employeemanager.service;
 
 import com.employeemanager.employeemanager.dto.NoteDTO;
+import com.employeemanager.employeemanager.exception.NoteNotFoundException;
 import com.employeemanager.employeemanager.mapper.NoteMapper;
 import com.employeemanager.employeemanager.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class NoteService {
     }
 
     public NoteDTO findNoteById(Long id) {
-        return noteMapper.toDTO(noteRepository.findById(id).orElseThrow());
+        return noteMapper.toDTO(noteRepository.findById(id).orElseThrow(()-> new NoteNotFoundException(id)));
     }
 
     public void deleteNote(Long id) {

@@ -1,9 +1,12 @@
 package com.employeemanager.employeemanager.service;
+
 import com.employeemanager.employeemanager.dto.TaskNoteDTO;
+import com.employeemanager.employeemanager.exception.TaskNoteNotFoundException;
 import com.employeemanager.employeemanager.mapper.TaskNoteMapper;
 import com.employeemanager.employeemanager.repository.TaskNoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +34,7 @@ public class TaskNoteService {
     }
 
     public TaskNoteDTO findTaskNoteById(Long id) {
-        return taskNoteMapper.toDTO(taskNoteRepository.findById(id).orElseThrow());//todo exception
+        return taskNoteMapper.toDTO(taskNoteRepository.findById(id).orElseThrow(() -> new TaskNoteNotFoundException(id, 0L, 0L)));
     }
 
     public void deleteTaskNote(Long id) {

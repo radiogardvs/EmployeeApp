@@ -2,6 +2,7 @@ package com.employeemanager.employeemanager.service;
 
 import com.employeemanager.employeemanager.dto.EmployeeEventAssignmentDTO;
 import com.employeemanager.employeemanager.dto.EmployeeTaskAssignmentDTO;
+import com.employeemanager.employeemanager.exception.EmployeeEventAssignmentNotFoundException;
 import com.employeemanager.employeemanager.mapper.EmployeeEventAssignmentMapper;
 import com.employeemanager.employeemanager.repository.EmployeeEventAssignmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,8 @@ public class EmployeeEventAssignmentService {
     }
 
     public EmployeeEventAssignmentDTO findEmployeeEventAssignmentById(Long id) {
-        return employeeEventAssignmentMapper.toDTO(employeeEventAssignmentRepository.findById(id).orElseThrow());//todo exception
+        return employeeEventAssignmentMapper.toDTO(employeeEventAssignmentRepository.findById(id).orElseThrow(
+                ()->new EmployeeEventAssignmentNotFoundException(id, 0L, 0L)));
     }
 
     public void deleteEmployeeEventAssignment(Long id) {

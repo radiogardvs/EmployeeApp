@@ -2,6 +2,9 @@ package com.employeemanager.employeemanager.dao;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "room")
 public class Room {
@@ -9,6 +12,8 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @OneToMany(mappedBy = "room")
+    private Set<EventRoom> eventRooms = new HashSet<>();
 
     public Room() {
 
@@ -36,9 +41,6 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "Room{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

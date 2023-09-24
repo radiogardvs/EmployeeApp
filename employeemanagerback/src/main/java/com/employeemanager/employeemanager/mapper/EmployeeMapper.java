@@ -10,12 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmployeeMapper {
     private final EmployeeRepository employeeRepository;
+
     @Autowired
-    public EmployeeMapper(EmployeeRepository employeeRepository){
-        this.employeeRepository=employeeRepository;
+    public EmployeeMapper(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
+
     public EmployeeDTO toDTO(Employee employee) {
-        EmployeeDTO employeeDTO=new EmployeeDTO();
+        EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setId(employee.getId());
         employeeDTO.setEmployeeCode(employee.getEmployeeCode());
         employeeDTO.setImageUrl(employee.getImageUrl());
@@ -27,11 +29,11 @@ public class EmployeeMapper {
     }
 
     public Employee findEntity(EmployeeDTO employeeDTO) {
-        return employeeRepository.findById(employeeDTO.getId()).orElseThrow();
+        return employeeRepository.findById(employeeDTO.getId()).orElseThrow(() -> new EmployeeNotFoundException(employeeDTO.getId()));
     }
 
-    public Employee toEntity(EmployeeDTO employeeDTO){
-        Employee employee=new Employee();
+    public Employee toEntity(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
         employee.setName(employeeDTO.getName());
         employee.setEmail(employeeDTO.getEmail());
         employee.setJobTitle(employeeDTO.getJobTitle());
@@ -40,8 +42,10 @@ public class EmployeeMapper {
         employee.setEmployeeCode(employeeDTO.getEmployeeCode());
         return employee;
     }
+
     public Employee updateEntity(EmployeeDTO employeeDTO) {
-        Employee employee = employeeRepository.findById(employeeDTO.getId()).orElseThrow();//todo exception
+        Employee employee = employeeRepository.findById(employeeDTO.getId()).orElseThrow(() ->
+                new EmployeeNotFoundException(employeeDTO.getId()));
         employee.setName(employeeDTO.getName());
         employee.setEmail(employeeDTO.getEmail());
         employee.setJobTitle(employeeDTO.getJobTitle());

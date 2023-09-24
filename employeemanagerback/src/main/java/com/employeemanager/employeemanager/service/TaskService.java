@@ -2,6 +2,7 @@ package com.employeemanager.employeemanager.service;
 
 import com.employeemanager.employeemanager.dao.Task;
 import com.employeemanager.employeemanager.dto.TaskDTO;
+import com.employeemanager.employeemanager.exception.TaskNotFoundException;
 import com.employeemanager.employeemanager.mapper.TaskMapper;
 import com.employeemanager.employeemanager.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class TaskService {
     }
 
     public TaskDTO findTaskById(Long id) {
-        return taskMapper.toDTO(taskRepository.findById(id).orElseThrow());
+        return taskMapper.toDTO(taskRepository.findById(id).orElseThrow(()-> new TaskNotFoundException(id)));
     }
 
     public void deleteTask(Long id) {

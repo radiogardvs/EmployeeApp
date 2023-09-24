@@ -17,6 +17,8 @@ public class Event {
     private Set<EmployeeEventAssignment> employeeEventAssignmentSet = new HashSet<>();
     @OneToMany(mappedBy = "event")
     private Set<EventNote> eventNotes = new HashSet<>();
+    @OneToMany(mappedBy = "event")
+    private Set<EventRoom> eventRooms =new HashSet<>();
 
     public Event() {
 
@@ -57,6 +59,22 @@ public class Event {
 
     public void setEmployeeEventAssignmentSet(Set<EmployeeEventAssignment> employeeEventAssignmentSet) {
         this.employeeEventAssignmentSet = employeeEventAssignmentSet;
+    }
+
+    public Set<EventNote> getEventNotes() {
+        return eventNotes;
+    }
+
+    public void setEventNotes(Set<EventNote> eventNotes) {
+        this.eventNotes = eventNotes;
+    }
+
+    public Set<EventRoom> getEventRooms() {
+        return eventRooms;
+    }
+
+    public void setEventRooms(Set<EventRoom> eventRooms) {
+        this.eventRooms = eventRooms;
     }
 
     @Override

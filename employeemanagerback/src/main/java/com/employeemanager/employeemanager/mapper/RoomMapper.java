@@ -2,6 +2,7 @@ package com.employeemanager.employeemanager.mapper;
 
 import com.employeemanager.employeemanager.dao.Room;
 import com.employeemanager.employeemanager.dto.RoomDTO;
+import com.employeemanager.employeemanager.exception.RoomNotFoundException;
 import com.employeemanager.employeemanager.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,8 @@ public class RoomMapper {
     }
 
     public Room findEntity(RoomDTO roomDTO) {
-        return roomRepository.findById(roomDTO.getId()).orElseThrow();
+        return roomRepository.findById(roomDTO.getId()).orElseThrow(() ->
+                new RoomNotFoundException(roomDTO.getId()));
     }
 
     public Room toEntity(RoomDTO roomDTO) {
@@ -33,7 +35,8 @@ public class RoomMapper {
     }
 
     public Room updateEntity(RoomDTO roomDTO) {
-        Room room = roomRepository.findById(roomDTO.getId()).orElseThrow();
+        Room room = roomRepository.findById(roomDTO.getId()).orElseThrow(() ->
+                new RoomNotFoundException(roomDTO.getId()));
         room.setName(roomDTO.getName());
         return room;
     }

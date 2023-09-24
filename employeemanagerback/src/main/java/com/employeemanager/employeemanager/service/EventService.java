@@ -2,6 +2,7 @@ package com.employeemanager.employeemanager.service;
 
 import com.employeemanager.employeemanager.dto.EmployeeDTO;
 import com.employeemanager.employeemanager.dto.EventDTO;
+import com.employeemanager.employeemanager.exception.EventNotFoundException;
 import com.employeemanager.employeemanager.mapper.EventMapper;
 import com.employeemanager.employeemanager.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class EventService {
     }
 
     public EventDTO findEventById(Long id) {
-        return eventMapper.toDTO(eventRepository.findById(id).orElseThrow());//todo exception
+        return eventMapper.toDTO(eventRepository.findById(id).orElseThrow(()-> new EventNotFoundException(id)));
     }
 
     public void deleteEvent(Long id) {

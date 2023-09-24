@@ -2,6 +2,9 @@ package com.employeemanager.employeemanager.mapper;
 
 import com.employeemanager.employeemanager.dao.TaskNote;
 import com.employeemanager.employeemanager.dto.TaskNoteDTO;
+import com.employeemanager.employeemanager.exception.NoteNotFoundException;
+import com.employeemanager.employeemanager.exception.TaskNotFoundException;
+import com.employeemanager.employeemanager.exception.TaskNoteNotFoundException;
 import com.employeemanager.employeemanager.repository.NoteRepository;
 import com.employeemanager.employeemanager.repository.TaskNoteRepository;
 import com.employeemanager.employeemanager.repository.TaskRepository;
@@ -30,19 +33,26 @@ public class TaskNoteMapper {
     }
 
     public TaskNote findEntity(TaskNoteDTO taskNoteDTO) {
-        return taskNoteRepository.findById(taskNoteDTO.getId()).orElseThrow();
+        return taskNoteRepository.findById(taskNoteDTO.getId()).orElseThrow(() ->
+                new TaskNoteNotFoundException(taskNoteDTO.getId(), taskNoteDTO.getTaskId(), taskNoteDTO.getNoteId()));
     }
 
     public TaskNote toEntity(TaskNoteDTO taskNoteDTO) {
         TaskNote taskNote = new TaskNote();
-        taskNote.setTask(taskRepository.findById(taskNoteDTO.getTaskId()).orElseThrow());
-        taskNote.setNote(noteRepository.findById(taskNoteDTO.getNoteId()).orElseThrow());
+        taskNote.setTask(taskRepository.findById(taskNoteDTO.getTaskId()).orElseThrow(() ->
+                new TaskNotFoundException(taskNoteDTO.getTaskId())));
+        taskNote.setNote(noteRepository.findById(taskNoteDTO.getNoteId()).orElseThrow(() ->
+                new NoteNotFoundException(taskNoteDTO.getNoteId())));
         return taskNote;
     }
-    public TaskNote updateEntity(TaskNoteDTO taskNoteDTO){
-        TaskNote taskNote= taskNoteRepository.findById(taskNoteDTO.getId()).orElseThrow();
-        taskNote.setTask(taskRepository.findById(taskNoteDTO.getTaskId()).orElseThrow());
-        taskNote.setNote(noteRepository.findById(taskNoteDTO.getNoteId()).orElseThrow());
+
+    public TaskNote updateEntity(TaskNoteDTO taskNoteDTO) {
+        TaskNote taskNote = taskNoteRepository.findById(taskNoteDTO.getId()).orElseThrow(() ->
+                new TaskNoteNotFoundException(taskNoteDTO.getId(), taskNoteDTO.getTaskId(), taskNoteDTO.getNoteId()));
+        taskNote.setTask(taskRepository.findById(taskNoteDTO.getTaskId()).orElseThrow(() ->
+                new TaskNotFoundException(taskNoteDTO.getTaskId())));
+        taskNote.setNote(noteRepository.findById(taskNoteDTO.getNoteId()).orElseThrow(() ->
+                new NoteNotFoundException(taskNoteDTO.getNoteId())));
         return taskNote;
     }
 }

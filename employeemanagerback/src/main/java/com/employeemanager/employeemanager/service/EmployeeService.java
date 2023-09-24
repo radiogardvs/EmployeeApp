@@ -1,6 +1,7 @@
 package com.employeemanager.employeemanager.service;
 import com.employeemanager.employeemanager.dto.EmployeeDTO;
 import com.employeemanager.employeemanager.dto.EmployeeTaskAssignmentDTO;
+import com.employeemanager.employeemanager.exception.EmployeeNotFoundException;
 import com.employeemanager.employeemanager.mapper.EmployeeMapper;
 import com.employeemanager.employeemanager.mapper.EmployeeTaskAssignmentMapper;
 import com.employeemanager.employeemanager.repository.*;
@@ -32,7 +33,7 @@ public class EmployeeService {
     }
 
     public EmployeeDTO findEmployeeById(Long id) {
-        return employeeMapper.toDTO(employeeRepository.findById(id).orElseThrow());//todo exception
+        return employeeMapper.toDTO(employeeRepository.findById(id).orElseThrow(()-> new EmployeeNotFoundException(id)));
     }
 
     public void deleteEmployee(Long id) {
