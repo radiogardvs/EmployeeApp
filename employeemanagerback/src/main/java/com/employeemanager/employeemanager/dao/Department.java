@@ -7,22 +7,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "room")
-public class Room implements Serializable {
+@Table(name = "department")
+public class Department implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "room")
-    private Set<EventRoom> eventRooms = new HashSet<>();
-
-    public Room() {
-
-    }
-
-    public Room(String name) {
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "department")
+    private Set<DepartmentEmployee> departmentEmployees = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -40,8 +32,19 @@ public class Room implements Serializable {
         this.name = name;
     }
 
+    public Set<DepartmentEmployee> getDepartmentEmployees() {
+        return departmentEmployees;
+    }
+
+    public void setDepartmentEmployees(Set<DepartmentEmployee> departmentEmployees) {
+        this.departmentEmployees = departmentEmployees;
+    }
+
     @Override
     public String toString() {
-        return "Room{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="employee")
+@Table(name = "employee")
 public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +24,9 @@ public class Employee implements Serializable {
     private Set<EmployeeTaskAssignment> employeeTaskAssignments = new HashSet<>();
 
     @OneToMany(mappedBy = "employee")
-    private Set<EmployeeEventAssignment> employeeEventAssignments= new HashSet<>();
+    private Set<EmployeeEventAssignment> employeeEventAssignments = new HashSet<>();
+    @OneToMany(mappedBy = "employee")
+    private Set<DepartmentEmployee> departmentEmployees = new HashSet<>();
 
     public Employee() {
     }
@@ -108,6 +110,14 @@ public class Employee implements Serializable {
 
     public void setEmployeeEventAssignments(Set<EmployeeEventAssignment> employeeEventAssignments) {
         this.employeeEventAssignments = employeeEventAssignments;
+    }
+
+    public Set<DepartmentEmployee> getDepartmentEmployees() {
+        return departmentEmployees;
+    }
+
+    public void setDepartmentEmployees(Set<DepartmentEmployee> departmentEmployees) {
+        this.departmentEmployees = departmentEmployees;
     }
 
     @Override

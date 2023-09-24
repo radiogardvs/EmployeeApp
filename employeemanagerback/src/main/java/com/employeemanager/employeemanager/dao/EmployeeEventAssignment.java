@@ -2,9 +2,11 @@ package com.employeemanager.employeemanager.dao;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name= "employee_event")
-public class EmployeeEventAssignment {
+public class EmployeeEventAssignment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -5,17 +5,26 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "employee_task")
-public class EmployeeTaskAssignment implements Serializable {
+@Table(name = "department_employee")
+public class DepartmentEmployee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+
+    public DepartmentEmployee() {
+
+    }
+
+    public DepartmentEmployee(Department department, Employee employee) {
+        this.department = department;
+        this.employee = employee;
+    }
 
     public Long getId() {
         return id;
@@ -25,12 +34,12 @@ public class EmployeeTaskAssignment implements Serializable {
         this.id = id;
     }
 
-    public Task getTask() {
-        return task;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public Employee getEmployee() {
@@ -43,10 +52,10 @@ public class EmployeeTaskAssignment implements Serializable {
 
     @Override
     public String toString() {
-        return "EmployeeTaskAssignment{" +
+        return "DepartmentEmployee{" +
                 "id=" + id +
+                ", department=" + department +
                 ", employee=" + employee +
-                ", task=" + task +
                 '}';
     }
 }

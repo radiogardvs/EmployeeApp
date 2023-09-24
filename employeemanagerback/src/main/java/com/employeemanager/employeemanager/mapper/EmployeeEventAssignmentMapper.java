@@ -48,7 +48,7 @@ public class EmployeeEventAssignmentMapper {
 
     public EmployeeEventAssignment updateEntity(EmployeeEventAssignmentDTO employeeEventAssignmentDTO) {
         EmployeeEventAssignment employeeEventAssignment = employeeEventAssignmentRepository.findById(employeeEventAssignmentDTO.getId()).orElseThrow(() ->
-                new EmployeeEventAssignmentNotFoundException(employeeEventAssignmentDTO.getId(),employeeEventAssignmentDTO.getEmployeeId(), employeeEventAssignmentDTO.getEventId()));
+                new EmployeeEventAssignmentNotFoundException(employeeEventAssignmentDTO.getId(), employeeEventAssignmentDTO.getEmployeeId(), employeeEventAssignmentDTO.getEventId()));
         employeeEventAssignment.setEmployee(employeeRepository.findById(employeeEventAssignmentDTO.getEmployeeId()).orElseThrow(() ->
                 new EmployeeNotFoundException(employeeEventAssignmentDTO.getEmployeeId())));
         employeeEventAssignment.setEvent(eventRepository.findById(employeeEventAssignmentDTO.getEventId()).orElseThrow(() ->

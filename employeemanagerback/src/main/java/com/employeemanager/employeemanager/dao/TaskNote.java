@@ -2,9 +2,11 @@ package com.employeemanager.employeemanager.dao;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="task_note")
-public class TaskNote {
+public class TaskNote implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.AUTO)
     private Long id;
