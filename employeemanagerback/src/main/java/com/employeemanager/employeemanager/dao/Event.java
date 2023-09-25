@@ -14,11 +14,11 @@ public class Event implements Serializable {
     private Long id;
     private String name;
     private String eventType;
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<EmployeeEventAssignment> employeeEventAssignmentSet = new HashSet<>();
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<EventNote> eventNotes = new HashSet<>();
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<EventRoom> eventRooms =new HashSet<>();
 
     public Event() {

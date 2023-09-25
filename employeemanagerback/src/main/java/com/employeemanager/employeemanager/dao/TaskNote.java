@@ -10,10 +10,10 @@ public class TaskNote implements Serializable {
     @Id
     @GeneratedValue(strategy =  GenerationType.AUTO)
     private Long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private Task task;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="note_id")
     private Note note;
 

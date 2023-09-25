@@ -13,9 +13,9 @@ public class Note implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "note")
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<TaskNote> taskNotes = new HashSet<>();
-    @OneToMany(mappedBy = "note")
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<EventNote> eventNotes = new HashSet<>();
 
     public Note() {

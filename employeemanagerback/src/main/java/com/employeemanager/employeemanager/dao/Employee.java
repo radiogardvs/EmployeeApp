@@ -20,12 +20,12 @@ public class Employee implements Serializable {
     private String imageUrl;
     private String employeeCode;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<EmployeeTaskAssignment> employeeTaskAssignments = new HashSet<>();
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<EmployeeEventAssignment> employeeEventAssignments = new HashSet<>();
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<DepartmentEmployee> departmentEmployees = new HashSet<>();
 
     public Employee() {

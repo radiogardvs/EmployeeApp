@@ -17,9 +17,9 @@ public class Task implements Serializable {
     private String description;
     private Integer estimatedTime;
     private Integer effectiveTime;
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<EmployeeTaskAssignment> employeeTaskAssignments=new HashSet<>();
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  Set<TaskNote> taskNotes=new HashSet<>();
 
     public Task() {
